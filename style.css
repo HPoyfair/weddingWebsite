@@ -26,15 +26,16 @@ body{
     max-width: 600px;
     height: auto;
 }
-.little-text{
+.little-text, #counter{
     line-height: 1;
-    margin: 8px 0;
+    margin: 0;
     font-family: Libre Baskerville;
     letter-spacing: 2px;
     color: #000000;
     font-size: 17px;
     font-weight: lighter;
     text-transform: uppercase;
+    text-align: center;
 }
 #titles {
     line-height: 1;
@@ -45,12 +46,18 @@ body{
     font-weight: lighter;
     text-transform: uppercase;
     letter-spacing: 6px;
-    padding-top: 220px;
+   
     padding-bottom: 15px;
 }
 
-
-#nav-bar{
+.nav-bar{
+    display:flex;
+    justify-content:center;
+    gap: 30px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
     font-family: Libre Baskerville;
 }
 #bottem-image, #top-image{
@@ -60,3 +67,110 @@ body{
     display: block;
     margin: 0px;
  }
+ .nav-bar a {
+    text-decoration: none; /* Remove default underline */
+    color: black;
+    position: relative;
+    padding-bottom: 5px; /* Space for underline */
+}
+
+/* Underline effect */
+.nav-bar a::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease-in-out;
+    margin: 0 auto;
+}
+
+/* Underline on hover */
+.nav-bar a:hover::after {
+    width: 100%;
+}
+
+/* Keep underline on active page */
+.nav-bar a.active::after {
+    width: 100%;
+}
+
+/* Footer Container */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    font-family: 'Libre Baskerville', serif;
+}
+
+/* M & H Initials */
+.footer-initials {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Thin Line Under "M & H" */
+.footer-line {
+    width: 60px; /* Adjust width */
+    height: 1px;
+    background-color: black;
+    margin: 0 auto 10px;
+}
+
+/* Date */
+.footer-date {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    margin: 50px 0;
+}
+
+
+.date-location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Adds spacing between date, line, and location */
+    font-size: 22px;
+    font-weight: normal; /* Removes excessive bold */
+    text-transform: uppercase;
+}
+
+/* Add vertical divider */
+.date-location .divider {
+    width: 1.5px;
+    height: 40px;
+    background-color: black;
+    display: inline-block;
+}
+
+/* Styling for wedding day and reception */
+.about h2 {
+    font-size: 28px;
+    font-weight: normal; /* Less bold, more elegant */
+    margin: 15px 0;
+}
+
+.about p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* Styling for attire */
+.about .attire {
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 15px;
+}
+.reception-details {
+    font-size: 22px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
