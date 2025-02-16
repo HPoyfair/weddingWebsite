@@ -106,26 +106,32 @@ footer {
     align-items: center;
     text-align: center;
     margin-top: 20px;
+    font-family: 'Libre Baskerville', serif;
 }
 
 /* M & H Initials */
 .footer-initials {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Libre Baskerville', serif;
+
 }
 
 /* Thin Line Under "M & H" */
 .footer-line {
-    width: 60px;
+    width: 160px;
     height: 1px;
     background-color: black;
     margin: 0 auto 10px;
+    font-family: 'Libre Baskerville', serif;
 }
 
 /* Date */
 .footer-date {
-    font-size: 16px;
+    font-size: 22px;
     font-weight: normal;
 }
 
@@ -145,7 +151,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: normal;
     text-transform: uppercase;
 }
@@ -240,4 +246,26 @@ footer {
     .footer-date {
         font-size: 14px;
     }
+}
+.initials-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.initials {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.initials-line {
+    width: 60px; /* Adjust width */
+    height: 2px;
+    background-color: black;
+    margin: 0 auto 10px;
+}
+
+.initials-date {
+    font-size: 16px;
+    font-weight: normal;
 }
