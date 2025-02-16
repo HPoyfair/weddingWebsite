@@ -22,12 +22,14 @@ function updateCountdown() {
 
 // Ensure script runs after page loads
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("script");
     updateCountdown();
 
     // Handle RSVP form submission
     const rsvpForm = document.getElementById("rsvp-form");
 
     if (rsvpForm) {
+        console.log("RSVP form found");
         rsvpForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
