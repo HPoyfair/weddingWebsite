@@ -36,33 +36,40 @@
             <a href="OUR-STORY.html">About</a>
             <a href="GALLERY.html">Gallery</a>
             <a href="REGISTRY.html">Registry</a>
-            <a href="INVITATION.html">Invitation</a>
-            <a href="#">RSVP</a>
+            <a href="#">Invitation</a>
+            <a href="RSVP.html">RSVP</a>
         </nav>
     </header>
 
     <!-- RSVP Form -->
     <section class="rsvp-section">
         <h2>RSVP</h2>
-        <form id="rsvp-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
+        <form id="invite-form">
+            <label for="invite-name">Name:</label>
+            <input type="text" id="invite-name" required>
         
-            <label for="address">Address:</label>
-            <input type="text" id="address" required>
+            <label for="invite-address">Address:</label>
+            <input type="text" id="invite-address" required>
         
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" required>
-        
-            <label for="guests">Number of Guests:</label>
-            <input type="number" id="guests" min="1" required>
+            <label for="invite-phone">Phone Number:</label>
+            <input type="tel" id="invite-phone" required>
         
             <label>
-                <input type="checkbox" id="also-invite"> Do you also want an invitation?
+                <input type="checkbox" id="also-rsvp"> Do you also want to RSVP?
             </label>
         
-            <button type="submit">Submit RSVP</button>
+            <!-- This input will be hidden by default and shown when the checkbox is checked -->
+            <div id="guests-container" style="display: none;">
+                <label for="invite-guests">Number of Guests:</label>
+                <input type="number" id="invite-guests" min="1">
+            </div>
+        
+            <button type="submit">Request Invitation</button>
         </form>
+        
+        <p id="response-message"></p>
+        
+        
 
         <p id="response-message"></p>
     </section>

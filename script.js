@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handle RSVP form submission
     const rsvpForm = document.getElementById("rsvp-form");
-
     if (rsvpForm) {
         console.log("RSVP form found"); // Debugging: Confirm form is found
         rsvpForm.addEventListener("submit", async function (event) {
@@ -51,30 +50,92 @@ document.addEventListener("DOMContentLoaded", function () {
                     .from("rsvp_guests")
                     .insert([
                         { 
-                            name: name, 
-                            address: address, 
-                            phone_number: phone, // Ensure this matches your table column name
-                            guests_count: guests  // Ensure this matches your table column name
+                            name, 
+                            address, 
+                            phone_number: phone, 
+                            guests_count: guests  
                         }
                     ]);
 
                 // Show success or error message
                 const responseMessage = document.getElementById("response-message");
                 if (error) {
-                    console.error("Supabase error:", error); // Debugging: Log the error
+                    console.error("Supabase error:", error);
                     responseMessage.textContent = "Error submitting RSVP. Please try again.";
                     responseMessage.style.color = "red";
                 } else {
-                    console.log("Data inserted successfully:", data); // Debugging: Log success
+                    console.log("RSVP Data inserted successfully:", data);
                     responseMessage.textContent = "RSVP submitted successfully!";
                     responseMessage.style.color = "green";
-                    rsvpForm.reset(); // Reset the form after successful submission
+                    rsvpForm.reset();
                 }
             } catch (err) {
-                console.error("Database error:", err); // Debugging: Log any unexpected errors
+                console.error("Database error:", err);
             }
         });
     } else {
-        console.error("RSVP form not found"); // Debugging: Log if form is missing
+        console.error("RSVP form not found");
+    }
+
+    // Handle Invitation form submission
+    const inviteForm = document.getElementById("invite-form");
+    const alsoRSVPCheckbox = document.getElementById("also-rsvp");
+    const guestsContainer = document.getElementById("guests-container");
+
+    // Show/hide guest input field based on checkbox state
+    if (alsoRSVPCheckbox) {
+        alsoRSVPCheckbox.addEventListener("change", function () {
+            if (this.checked) {
+                guestsContainer.style.display = "block"; // Show the input field
+            } else {
+                guestsContainer.style.display = "none"; // Hide the input field
+            }
+        });
+    }
+
+    if (inviteForm) {
+        inviteForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("invite-name").value;
+            const address = document.getElementById("invite-address").value;
+            const phone = document.getElementById("invite-phone").value;
+            const alsoRSVP = alsoRSVPCheckbox.checked;
+            let guests = null;
+
+            // If RSVP is checked, get the number of guests
+            if (alsoRSVP) {
+                guests = parseInt(document.getElementById("invite-guests").value, 10);
+            }
+
+            // Insert into Invitation table
+            try {
+                const { data: inviteData, error: inviteError } = await supabase.from("invitations").insert([
+                    { name, address, phone_number: phone }
+                ]);
+
+                if (inviteError) {
+                    console.error("Invitation Error:", inviteError);
+                    return;
+                }
+
+                // If "also RSVP" is checked, insert into RSVP table with the guests count
+                if (alsoRSVP) {
+                    const { data: rsvpData, error: rsvpError } = await supabase.from("rsvp_guests").insert([
+                        { name, address, phone_number: phone, guests_count: guests || 1 } // Default to 1 if empty
+                    ]);
+
+                    if (rsvpError) {
+                        console.error("RSVP Error:", rsvpError);
+                    }
+                }
+
+                inviteForm.reset();
+                alert("Invitation request submitted successfully!");
+                guestsContainer.style.display = "none"; // Hide guest input field after submission
+            } catch (err) {
+                console.error("Database error:", err);
+            }
+        });
     }
 });
