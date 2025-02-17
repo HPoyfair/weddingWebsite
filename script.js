@@ -93,23 +93,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Insert into Invitation table
             try {
-                const { data: inviteData, error: inviteError } = await supabase.from("invitation").insert([
-                    { name, address, phone_number: phone }
-                ]);
+                const { data: inviteData, error: inviteError } = await supabase
+                    .from("Invitation")
+                    .insert([{ name, address, phone_number: phone }]);
 
                 if (inviteError) {
                     console.error("Invitation Error:", inviteError);
+                    alert("Error submitting invitation. Please try again.");
                     return;
                 }
 
+                console.log("Invitation Data inserted successfully:", inviteData);
+
                 // If "also RSVP" is checked, insert into RSVP table with the guests count
                 if (alsoRSVP) {
-                    const { data: rsvpData, error: rsvpError } = await supabase.from("rsvp_guests").insert([
-                        { name, address, phone_number: phone, guests_count: guests || 1 } // Default to 1 if empty
-                    ]);
+                    const { data: rsvpData, error: rsvpError } = await supabase
+                        .from("rsvp_guests")
+                        .insert([{ name, address, phone_number: phone, guests_count: guests || 1 }]); // Default to 1 if empty
 
                     if (rsvpError) {
                         console.error("RSVP Error:", rsvpError);
+                        alert("Error submitting RSVP. Please try again.");
+                    } else {
+                        console.log("RSVP Data inserted successfully:", rsvpData);
                     }
                 }
 
@@ -118,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 guestsContainer.style.display = "none"; // Hide guest input field after submission
             } catch (err) {
                 console.error("Database error:", err);
+                alert("An unexpected error occurred. Please try again.");
             }
         });
     }
