@@ -275,3 +275,62 @@ footer {
     flex-direction: column;
     gap: 20px;
 }
+/* Registry section styling */
+.registry-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Space between items */
+    padding: 20px;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+}
+
+/* Each box */
+.registry-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 250px; /* Fixed width for each box */
+    padding: 15px;
+    background-color: white; /* Background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease-in-out;
+}
+
+.registry-item:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Images */
+.image-boxes {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Links */
+.registry-item a {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.registry-item a:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Responsive: Stack boxes on mobile */
+@media screen and (max-width: 768px) {
+    .registry-boxes {
+        flex-direction: column; /* Stack on smaller screens */
+        align-items: center;
+        gap: 20px; /* Less spacing between items */
+    }
+}
