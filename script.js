@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const rsvpForm = document.getElementById("rsvp-form");
     if (rsvpForm) {
         console.log("RSVP form found"); // Debugging: Confirm form is found
+
+        // Checkbox for "also request an invitation"
+        const alsoInviteCheckbox = document.getElementById("also-invite");
+
         rsvpForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
@@ -37,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const address = document.getElementById("address").value;
             const phone = document.getElementById("phone").value;
             const guests = parseInt(document.getElementById("guests").value, 10);
+            const alsoInvite = alsoInviteCheckbox ? alsoInviteCheckbox.checked : false;
 
             // Validate form inputs
             if (!name || !address || !phone || isNaN(guests) || guests < 1) {
@@ -44,26 +49,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Insert into Supabase
+            // Insert into RSVP table
             try {
-                const { data, error } = await supabase
+                const { data: rsvpData, error: rsvpError } = await supabase
                     .from("rsvp_guests")
                     .insert([{ name, address, phone_number: phone, guests_count: guests }]);
 
-                // Show success or error message
-                const responseMessage = document.getElementById("response-message");
-                if (error) {
-                    console.error("Supabase error:", error);
-                    responseMessage.textContent = "Error submitting RSVP. Please try again.";
-                    responseMessage.style.color = "red";
-                } else {
-                    console.log("RSVP Data inserted successfully:", data);
-                    responseMessage.textContent = "RSVP submitted successfully!";
-                    responseMessage.style.color = "green";
-                    rsvpForm.reset();
+                if (rsvpError) {
+                    console.error("RSVP Error:", rsvpError);
+                    alert("Error submitting RSVP. Please try again.");
+                    return;
                 }
+
+                console.log("RSVP Data inserted successfully:", rsvpData);
+
+                // If "also request an invitation" is checked, insert into Invitation table
+                if (alsoInvite) {
+                    const { data: inviteData, error: inviteError } = await supabase
+                        .from("invitation")
+                        .insert([{ name, address, phone_number: phone }]);
+
+                    if (inviteError) {
+                        console.error("Invitation Error:", inviteError);
+                        alert("Error submitting invitation. Please try again.");
+                    } else {
+                        console.log("Invitation Data inserted successfully:", inviteData);
+                    }
+                }
+
+                rsvpForm.reset();
+                alert("RSVP submitted successfully!");
             } catch (err) {
                 console.error("Database error:", err);
+                alert("An unexpected error occurred. Please try again.");
             }
         });
     }
