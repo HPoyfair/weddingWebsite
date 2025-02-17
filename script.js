@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Insert into Invitation table
             try {
-                const { data: inviteData, error: inviteError } = await supabase.from("invitations").insert([
+                const { data: inviteData, error: inviteError } = await supabase.from("Invitation").insert([
                     { name, address, phone_number: phone }
                 ]);
 
