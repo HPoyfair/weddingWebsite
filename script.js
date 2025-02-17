@@ -65,12 +65,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // If "also request an invitation" is checked, insert into Invitation table
                 if (alsoInvite) {
+                    console.log("Attempting to insert into Invitation table...");
                     const { data: inviteData, error: inviteError } = await supabase
-                        .from("invitation")
+                        .from("Invitation") // Ensure this matches the table name in Supabase
                         .insert([{ name, address, phone_number: phone }]);
 
                     if (inviteError) {
-                        console.error("Invitation Error:", inviteError);
+                        console.error("Invitation Error Details:", inviteError);
+                        console.error("Invitation Error Message:", inviteError.message);
+                        console.error("Invitation Error Details:", inviteError.details);
                         alert("Error submitting invitation. Please try again.");
                     } else {
                         console.log("Invitation Data inserted successfully:", inviteData);
@@ -112,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Insert into Invitation table
             try {
                 const { data: inviteData, error: inviteError } = await supabase
-                    .from("Invitation")
+                    .from("Invitation") // Ensure this matches the table name in Supabase
                     .insert([{ name, address, phone_number: phone }]);
 
                 if (inviteError) {
