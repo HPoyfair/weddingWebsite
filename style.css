@@ -334,3 +334,170 @@ footer {
         gap: 20px; /* Less spacing between items */
     }
 }
+.invite-section, .rsvp-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f8f5f2;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.invite-section h1, .rsvp-section h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.invite-section p, .rsvp-section p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .invite-section, .rsvp-section {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .invite-section h1, .rsvp-section h1 {
+        font-size: 26px;
+    }
+
+    .invite-section p, .rsvp-section p {
+        font-size: 16px;
+    }
+}
+/* Form Styling */
+/* Form Styling */
+/* Form Styling */
+.rsvp-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f8f5f2;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.rsvp-section h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.rsvp-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 15px; /* Space between fields */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.checkbox-group {
+    grid-column: span 2; /* Make the checkbox span both columns */
+    text-align: left;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.rsvp-section button {
+    grid-column: span 2; /* Make the button span both columns */
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rsvp-section button:hover {
+    background-color: #555;
+}
+
+#invite-response-message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    display: none;
+}
+
+/* Responsive Design for Mobile */
+@media screen and (max-width: 768px) {
+    .rsvp-section {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .rsvp-section h2 {
+        font-size: 26px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; /* Single column for mobile */
+    }
+
+    .form-group label {
+        font-size: 16px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .rsvp-section button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    #invite-response-message {
+        font-size: 16px;
+    }
+}

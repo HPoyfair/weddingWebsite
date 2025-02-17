@@ -41,30 +41,47 @@
         </nav>
     </header>
 
+    <section class ="invite-section">
+        <h1>We’d Love to Send You an Invitation!</h1>
+        <p>We’re so excited to celebrate our special day with friends and family. If you’d like to receive a formal invitation, please provide your details below, and we’ll make sure it gets to you.
+
+            Want to RSVP now too? Just check the box below and let us know how many will be attending—no need to fill out a separate form!
+            
+            We can’t wait to celebrate with you!</p>
+    </section>
+
     <!-- RSVP Form -->
     <!-- Invitation Form -->
+<!-- Invitation Form -->
 <section class="rsvp-section">
     <h2>Request Invitation</h2>
     <form id="invite-form">
-        <label for="invite-name">Name:</label>
-        <input type="text" id="invite-name" required>
-
-        <label for="invite-address">Address:</label>
-        <input type="text" id="invite-address" required>
-
-        <label for="invite-phone">Phone Number:</label>
-        <input type="tel" id="invite-phone" required>
-
-        <label>
-            <input type="checkbox" id="also-rsvp"> Do you also want to RSVP?
-        </label>
-
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="invite-name">Name:</label>
+                <input type="text" id="invite-name" required>
+            </div>
+            <div class="form-group">
+                <label for="invite-address">Address:</label>
+                <input type="text" id="invite-address" required>
+            </div>
+            <div class="form-group">
+                <label for="invite-phone">Phone Number:</label>
+                <input type="tel" id="invite-phone" required>
+            </div>
+        </div>
+        <div class="form-group checkbox-group">
+            <label>
+                <input type="checkbox" id="also-rsvp"> Do you also want to RSVP?
+            </label>
+        </div>
         <!-- This input will be hidden by default and shown when the checkbox is checked -->
         <div id="guests-container" style="display: none;">
-            <label for="invite-guests">Number of Guests:</label>
-            <input type="number" id="invite-guests" min="1">
+            <div class="form-group">
+                <label for="invite-guests">Number of Guests:</label>
+                <input type="number" id="invite-guests" min="1">
+            </div>
         </div>
-
         <button type="submit">Request Invitation</button>
     </form>
 
