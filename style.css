@@ -269,3 +269,9 @@ footer {
     font-size: 16px;
     font-weight: normal;
 }
+
+.images{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
