@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Script loaded"); // Debugging: Confirm script is running
     updateCountdown();
 
-    // Handle RSVP form submission
+    // Handle RSVP form submission (Only if RSVP form exists)
     const rsvpForm = document.getElementById("rsvp-form");
     if (rsvpForm) {
         console.log("RSVP form found"); // Debugging: Confirm form is found
@@ -48,14 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             try {
                 const { data, error } = await supabase
                     .from("rsvp_guests")
-                    .insert([
-                        { 
-                            name, 
-                            address, 
-                            phone_number: phone, 
-                            guests_count: guests  
-                        }
-                    ]);
+                    .insert([{ name, address, phone_number: phone, guests_count: guests }]);
 
                 // Show success or error message
                 const responseMessage = document.getElementById("response-message");
@@ -73,27 +66,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Database error:", err);
             }
         });
-    } else {
-        console.error("RSVP form not found");
     }
 
-    // Handle Invitation form submission
+    // Handle Invitation form submission (Only if Invitation form exists)
     const inviteForm = document.getElementById("invite-form");
-    const alsoRSVPCheckbox = document.getElementById("also-rsvp");
-    const guestsContainer = document.getElementById("guests-container");
-
-    // Show/hide guest input field based on checkbox state
-    if (alsoRSVPCheckbox) {
-        alsoRSVPCheckbox.addEventListener("change", function () {
-            if (this.checked) {
-                guestsContainer.style.display = "block"; // Show the input field
-            } else {
-                guestsContainer.style.display = "none"; // Hide the input field
-            }
-        });
-    }
-
     if (inviteForm) {
+        console.log("Invitation form found"); // Debugging
+        const alsoRSVPCheckbox = document.getElementById("also-rsvp");
+        const guestsContainer = document.getElementById("guests-container");
+
+        // Show/hide guest input field based on checkbox state
+        if (alsoRSVPCheckbox) {
+            alsoRSVPCheckbox.addEventListener("change", function () {
+                guestsContainer.style.display = this.checked ? "block" : "none";
+            });
+        }
+
         inviteForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
@@ -101,16 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const address = document.getElementById("invite-address").value;
             const phone = document.getElementById("invite-phone").value;
             const alsoRSVP = alsoRSVPCheckbox.checked;
-            let guests = null;
-
-            // If RSVP is checked, get the number of guests
-            if (alsoRSVP) {
-                guests = parseInt(document.getElementById("invite-guests").value, 10);
-            }
+            let guests = alsoRSVP ? parseInt(document.getElementById("invite-guests").value, 10) : null;
 
             // Insert into Invitation table
             try {
-                const { data: inviteData, error: inviteError } = await supabase.from("Invitation").insert([
+                const { data: inviteData, error: inviteError } = await supabase.from("invitation").insert([
                     { name, address, phone_number: phone }
                 ]);
 
