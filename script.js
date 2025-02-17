@@ -45,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Validate form inputs
             if (!name || !address || !phone || isNaN(guests) || guests < 1) {
-                alert("Please fill out all fields correctly.");
+                document.getElementById("rsvp-response-message").textContent = "Please fill out all fields correctly.";
+                document.getElementById("rsvp-response-message").style.color = "red";
+                document.getElementById("rsvp-response-message").style.display = "block";
                 return;
             }
 
@@ -57,7 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (rsvpError) {
                     console.error("RSVP Error:", rsvpError);
-                    alert("Error submitting RSVP. Please try again.");
+                    document.getElementById("rsvp-response-message").textContent = "Error submitting RSVP. Please try again.";
+                    document.getElementById("rsvp-response-message").style.color = "red";
+                    document.getElementById("rsvp-response-message").style.display = "block";
                     return;
                 }
 
@@ -67,24 +71,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (alsoInvite) {
                     console.log("Attempting to insert into Invitation table...");
                     const { data: inviteData, error: inviteError } = await supabase
-                        .from("Invitation") // Ensure this matches the table name in Supabase
+                        .from("Invitation")
                         .insert([{ name, address, phone_number: phone }]);
 
                     if (inviteError) {
                         console.error("Invitation Error Details:", inviteError);
-                        console.error("Invitation Error Message:", inviteError.message);
-                        console.error("Invitation Error Details:", inviteError.details);
-                        alert("Error submitting invitation. Please try again.");
+                        document.getElementById("rsvp-response-message").textContent = "Error submitting invitation. Please try again.";
+                        document.getElementById("rsvp-response-message").style.color = "red";
+                        document.getElementById("rsvp-response-message").style.display = "block";
                     } else {
                         console.log("Invitation Data inserted successfully:", inviteData);
                     }
                 }
 
                 rsvpForm.reset();
-                alert("RSVP submitted successfully!");
+                document.getElementById("rsvp-response-message").textContent = "RSVP submitted successfully!";
+                document.getElementById("rsvp-response-message").style.color = "green";
+                document.getElementById("rsvp-response-message").style.display = "block";
             } catch (err) {
                 console.error("Database error:", err);
-                alert("An unexpected error occurred. Please try again.");
+                document.getElementById("rsvp-response-message").textContent = "An unexpected error occurred. Please try again.";
+                document.getElementById("rsvp-response-message").style.color = "red";
+                document.getElementById("rsvp-response-message").style.display = "block";
             }
         });
     }
@@ -115,12 +123,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Insert into Invitation table
             try {
                 const { data: inviteData, error: inviteError } = await supabase
-                    .from("Invitation") // Ensure this matches the table name in Supabase
+                    .from("Invitation")
                     .insert([{ name, address, phone_number: phone }]);
 
                 if (inviteError) {
                     console.error("Invitation Error:", inviteError);
-                    alert("Error submitting invitation. Please try again.");
+                    document.getElementById("invite-response-message").textContent = "Error submitting invitation. Please try again.";
+                    document.getElementById("invite-response-message").style.color = "red";
+                    document.getElementById("invite-response-message").style.display = "block";
                     return;
                 }
 
@@ -134,18 +144,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (rsvpError) {
                         console.error("RSVP Error:", rsvpError);
-                        alert("Error submitting RSVP. Please try again.");
+                        document.getElementById("invite-response-message").textContent = "Error submitting RSVP. Please try again.";
+                        document.getElementById("invite-response-message").style.color = "red";
+                        document.getElementById("invite-response-message").style.display = "block";
                     } else {
                         console.log("RSVP Data inserted successfully:", rsvpData);
                     }
                 }
 
                 inviteForm.reset();
-                alert("Invitation request submitted successfully!");
+                document.getElementById("invite-response-message").textContent = "Invitation request submitted successfully!";
+                document.getElementById("invite-response-message").style.color = "green";
+                document.getElementById("invite-response-message").style.display = "block";
                 guestsContainer.style.display = "none"; // Hide guest input field after submission
             } catch (err) {
                 console.error("Database error:", err);
-                alert("An unexpected error occurred. Please try again.");
+                document.getElementById("invite-response-message").textContent = "An unexpected error occurred. Please try again.";
+                document.getElementById("invite-response-message").style.color = "red";
+                document.getElementById("invite-response-message").style.display = "block";
             }
         });
     }

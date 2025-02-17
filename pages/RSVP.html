@@ -43,6 +43,7 @@
 
     <!-- RSVP Form -->
 
+<!-- RSVP Form -->
 <section class="rsvp-section">
     <h2>RSVP</h2>
     <form id="rsvp-form">
@@ -58,7 +59,7 @@
         <label for="guests">Number of Guests:</label>
         <input type="number" id="guests" required min="1">
 
-   
+        <!-- Checkbox for "also request an invitation" -->
         <label>
             <input type="checkbox" id="also-invite"> Also request an invitation
         </label>
@@ -66,9 +67,9 @@
         <button type="submit">Submit RSVP</button>
     </form>
 
-    <p id="response-message"></p>
+    <!-- Success/Error message for RSVP form -->
+    <p id="rsvp-response-message" style="color: green; display: none;"></p>
 </section>
-
     <!-- Footer -->
     <footer>
         <div class="footer-content">

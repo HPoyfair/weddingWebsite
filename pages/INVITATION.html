@@ -42,37 +42,35 @@
     </header>
 
     <!-- RSVP Form -->
-    <section class="rsvp-section">
-        <h2>RSVP</h2>
-        <form id="invite-form">
-            <label for="invite-name">Name:</label>
-            <input type="text" id="invite-name" required>
-        
-            <label for="invite-address">Address:</label>
-            <input type="text" id="invite-address" required>
-        
-            <label for="invite-phone">Phone Number:</label>
-            <input type="tel" id="invite-phone" required>
-        
-            <label>
-                <input type="checkbox" id="also-rsvp"> Do you also want to RSVP?
-            </label>
-        
-            <!-- This input will be hidden by default and shown when the checkbox is checked -->
-            <div id="guests-container" style="display: none;">
-                <label for="invite-guests">Number of Guests:</label>
-                <input type="number" id="invite-guests" min="1">
-            </div>
-        
-            <button type="submit">Request Invitation</button>
-        </form>
-        
-        <p id="response-message"></p>
-        
-        
+    <!-- Invitation Form -->
+<section class="rsvp-section">
+    <h2>Request Invitation</h2>
+    <form id="invite-form">
+        <label for="invite-name">Name:</label>
+        <input type="text" id="invite-name" required>
 
-        <p id="response-message"></p>
-    </section>
+        <label for="invite-address">Address:</label>
+        <input type="text" id="invite-address" required>
+
+        <label for="invite-phone">Phone Number:</label>
+        <input type="tel" id="invite-phone" required>
+
+        <label>
+            <input type="checkbox" id="also-rsvp"> Do you also want to RSVP?
+        </label>
+
+        <!-- This input will be hidden by default and shown when the checkbox is checked -->
+        <div id="guests-container" style="display: none;">
+            <label for="invite-guests">Number of Guests:</label>
+            <input type="number" id="invite-guests" min="1">
+        </div>
+
+        <button type="submit">Request Invitation</button>
+    </form>
+
+    <!-- Success/Error message for Invitation form -->
+    <p id="invite-response-message" style="color: green; display: none;"></p>
+</section>
 
     <!-- Footer -->
     <footer>
